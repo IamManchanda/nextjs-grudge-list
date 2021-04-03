@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { GrudgeContext } from "../contexts/grudge";
+import { GrudgeContext } from "../store/grudge";
 
 function GrudgeItem({ grudge }) {
   const { toggleForgiveness } = useContext(GrudgeContext);

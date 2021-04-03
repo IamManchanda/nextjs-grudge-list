@@ -1,5 +1,5 @@
 import { useState, useContext } from "react";
-import { GrudgeContext } from "../contexts/grudge";
+import { GrudgeContext } from "../store/grudge";
 
 function NewGrudge() {
   const [person, setPerson] = useState("");

@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import GrudgeItem from "./grudge-item";
-import { GrudgeContext } from "../contexts/grudge";
+import { GrudgeContext } from "../store/grudge";
 
 function GrudgeList() {
   const { grudges } = useContext(GrudgeContext);

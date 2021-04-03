@@ -1,5 +1,5 @@
 import "../assets/styles/scss/styles.scss";
-import { GrudgeProvider } from "../contexts/grudge";
+import { GrudgeProvider } from "../store/grudge";
 
 function MyApp({ Component, pageProps }) {
   return (

@@ -1,6 +1,6 @@
 import Head from "next/head";
 import { useContext } from "react";
-import { GrudgeContext } from "../contexts/grudge";
+import { GrudgeContext } from "../store/grudge";
 
 import GrudgeList from "../components/grudge-list";
 import NewGrudge from "../components/new-grudge";
