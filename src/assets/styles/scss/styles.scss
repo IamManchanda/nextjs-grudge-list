@@ -3,6 +3,9 @@ $color-primary-2: hsl(346, 89%, 57%);
 $color-primary-3: hsl(346, 89%, 62%);
 $color-primary-4: hsl(346, 89%, 67%);
 
+$color-white-1: hsl(0, 0%, 100%);
+$color-white-2: hsl(0, 0%, 90%);
+
 html,
 * {
   box-sizing: border-box;
@@ -84,8 +87,11 @@ input[type="submit"].full-width {
 .new-grudge-input {
   width: 100%;
 
-  &,
+  & {
+    color: $color-white-1;
+  }
+
   &::placeholder {
-    color: #fff;
+    color: $color-white-2;
   }
 }
