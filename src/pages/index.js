@@ -1,6 +1,6 @@
 import Head from "next/head";
 import { Fragment, useReducer, useCallback } from "react";
-import uuid from "uuid/v4";
+import { v4 as uuidv4 } from "uuid";
 
 import initialState from "../fixtures/initial-state";
 
@@ -33,7 +33,7 @@ function PageIndex() {
       dispatchGrudges({
         type: GRUDGE_ADD,
         payload: {
-          id: uuid(),
+          id: uuidv4(),
           person,
           reason,
           forgiven: false,
