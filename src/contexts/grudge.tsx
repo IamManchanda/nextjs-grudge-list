@@ -1,4 +1,4 @@
-import { useReducer, createContext } from "react";
+import { createContext } from "react";
 import { v4 as uuidv4 } from "uuid";
 import initialGrudgesState from "../fixtures/initial-grudges-state";
 import {
@@ -7,63 +7,32 @@ import {
   GRUDGE_UNDO,
   GRUDGE_REDO,
 } from "../constants/grudge";
+import useUndoRedoReducer from "../hooks/use-undo-redo-reducer";
 
 export const GrudgeContext = createContext(null);
 
-const defaultGrudgesState = {
-  past: [],
-  present: initialGrudgesState,
-  future: [],
-};
-
 const grudgesReducer = (
-  grudgesState = defaultGrudgesState,
+  grudgesState = initialGrudgesState,
   { type, payload },
 ) => {
   switch (type) {
     case GRUDGE_ADD:
-      const newPresentAfterAdd = [
+      return [
         {
           id: uuidv4(),
           ...payload,
         },
-        ...grudgesState.present,
+        ...grudgesState,
       ];
-      return {
-        past: [grudgesState.present, ...grudgesState.past],
-        present: newPresentAfterAdd,
-        future: [],
-      };
 
     case GRUDGE_FORGIVE:
-      const newPresentAfterForgive = grudgesState.present.map((grudge) => {
+      return grudgesState.map((grudge) => {
         if (grudge.id !== payload.id) return grudge;
         return {
           ...grudge,
           forgiven: !grudge.forgiven,
         };
       });
-      return {
-        past: [grudgesState.present, ...grudgesState.past],
-        present: newPresentAfterForgive,
-        future: [],
-      };
-
-    case GRUDGE_UNDO:
-      const [newPresentAfterUndo, ...newPast] = grudgesState.past;
-      return {
-        past: newPast,
-        present: newPresentAfterUndo,
-        future: [grudgesState.present, ...grudgesState.future],
-      };
-
-    case GRUDGE_REDO:
-      const [newPresentAfterRedo, ...newFuture] = grudgesState.future;
-      return {
-        past: [grudgesState.present, ...grudgesState.past],
-        present: newPresentAfterRedo,
-        future: newFuture,
-      };
 
     default:
       return grudgesState;
@@ -71,13 +40,12 @@ const grudgesReducer = (
 };
 
 export const GrudgeProvider = ({ children }) => {
-  const [grudgesState, dispatchGrudges] = useReducer(
+  const [grudgesState, dispatchGrudges] = useUndoRedoReducer(
     grudgesReducer,
-    defaultGrudgesState,
+    initialGrudgesState,
   );
 
   const grudges = grudgesState.present;
-
   const hasPastGrudge = Boolean(grudgesState.past.length);
   const hasFutureGrudge = Boolean(grudgesState.future.length);
 
