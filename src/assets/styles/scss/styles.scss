@@ -18,7 +18,7 @@ body {
 input {
   font: caption;
   padding: 0.5em;
-  border: 1px solid $color-primary-2;
+  border: 1px dashed $color-primary-2;
   background-color: $color-primary-4;
 
   &:not(:first-of-type) {
@@ -30,7 +30,8 @@ button,
 .button,
 input[type="submit"] {
   background-color: $color-primary-2;
-  border: 1px solid $color-primary-1;
+  border: 1px dashed $color-primary-1;
+  box-shadow: 0 2px 5px 0 rgb(0 0 0 / 16%), 0 2px 10px 0 rgb(0 0 0 / 12%);
   color: white;
   padding: 0.5em;
   transition: all 0.2s;
@@ -46,7 +47,7 @@ input[type="submit"] {
 
   &:disabled {
     background-color: lighten($color-primary-2, 20%);
-    border: 1px solid lighten($color-primary-2, 20%);
+    border: 1px dashed lighten($color-primary-2, 20%);
     cursor: not-allowed;
   }
 }
@@ -70,9 +71,10 @@ input[type="submit"].full-width {
 }
 
 .grudge {
-  border: 1px solid $color-primary-3;
+  border: 1px dashed #f44870;
   padding: 1em;
   margin: 1em 0;
+  box-shadow: 0 2px 5px 0 rgb(0 0 0 / 16%), 0 2px 10px 0 rgb(0 0 0 / 12%);
 
   h3 {
     margin-top: 0;
@@ -85,10 +87,13 @@ input[type="submit"].full-width {
 
 .new-grudge {
   display: flex;
+  justify-content: space-between;
 }
 
 .new-grudge-input {
   width: 100%;
+  flex-basis: 40%;
+  box-shadow: 0 2px 5px 0 rgb(0 0 0 / 16%), 0 2px 10px 0 rgb(0 0 0 / 12%);
 
   & {
     color: $color-white-1;

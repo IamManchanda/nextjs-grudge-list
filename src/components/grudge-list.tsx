@@ -6,7 +6,7 @@ function GrudgeList() {
   const { grudges } = useContext(GrudgeContext);
 
   return (
-    <section className="Grudges">
+    <section className="grudges">
       <h2>Grudges ({grudges.length})</h2>
       {grudges.map((grudge) => (
         <GrudgeItem key={grudge.id} grudge={grudge} />

@@ -15,23 +15,26 @@ function NewGrudge() {
   }
 
   return (
-    <form className="new-grudge" onSubmit={handleChange}>
-      <input
-        className="new-grudge-input"
-        placeholder="Person"
-        type="text"
-        value={person}
-        onChange={(event) => setPerson(event.target.value)}
-      />
-      <input
-        className="new-grudge-input"
-        placeholder="Reason"
-        type="text"
-        value={reason}
-        onChange={(event) => setReason(event.target.value)}
-      />
-      <input className="new-grudge-submit button" type="submit" />
-    </form>
+    <>
+      <h2>Add a Grudge</h2>
+      <form className="new-grudge" onSubmit={handleChange}>
+        <input
+          className="new-grudge-input"
+          placeholder="Person"
+          type="text"
+          value={person}
+          onChange={(event) => setPerson(event.target.value)}
+        />
+        <input
+          className="new-grudge-input"
+          placeholder="Reason"
+          type="text"
+          value={reason}
+          onChange={(event) => setReason(event.target.value)}
+        />
+        <input className="new-grudge-submit button" type="submit" />
+      </form>
+    </>
   );
 }
 

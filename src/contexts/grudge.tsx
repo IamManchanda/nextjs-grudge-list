@@ -1,7 +1,12 @@
 import { useReducer, createContext } from "react";
 import { v4 as uuidv4 } from "uuid";
 import initialGrudgesState from "../fixtures/initial-grudges-state";
-import { GRUDGE_ADD, GRUDGE_FORGIVE, GRUDGE_UNDO } from "../constants/grudge";
+import {
+  GRUDGE_ADD,
+  GRUDGE_FORGIVE,
+  GRUDGE_UNDO,
+  GRUDGE_REDO,
+} from "../constants/grudge";
 
 export const GrudgeContext = createContext(null);
 
@@ -17,7 +22,7 @@ const grudgesReducer = (
 ) => {
   switch (type) {
     case GRUDGE_ADD:
-      const newPresentForAdd = [
+      const newPresentAfterAdd = [
         {
           id: uuidv4(),
           ...payload,
@@ -26,12 +31,12 @@ const grudgesReducer = (
       ];
       return {
         past: [grudgesState.present, ...grudgesState.past],
-        present: newPresentForAdd,
+        present: newPresentAfterAdd,
         future: [],
       };
 
     case GRUDGE_FORGIVE:
-      const newPresentForForgive = grudgesState.present.map((grudge) => {
+      const newPresentAfterForgive = grudgesState.present.map((grudge) => {
         if (grudge.id !== payload.id) return grudge;
         return {
           ...grudge,
@@ -40,16 +45,24 @@ const grudgesReducer = (
       });
       return {
         past: [grudgesState.present, ...grudgesState.past],
-        present: newPresentForForgive,
+        present: newPresentAfterForgive,
         future: [],
       };
 
     case GRUDGE_UNDO:
-      const [newPresent, ...newPast] = grudgesState.past;
+      const [newPresentAfterUndo, ...newPast] = grudgesState.past;
       return {
         past: newPast,
-        present: newPresent,
+        present: newPresentAfterUndo,
         future: [grudgesState.present, ...grudgesState.future],
+      };
+
+    case GRUDGE_REDO:
+      const [newPresentAfterRedo, ...newFuture] = grudgesState.future;
+      return {
+        past: [grudgesState.present, ...grudgesState.past],
+        present: newPresentAfterRedo,
+        future: newFuture,
       };
 
     default:
@@ -88,9 +101,16 @@ export const GrudgeProvider = ({ children }) => {
   }
 
   function undoGrudge() {
-    //@ts-ignore
     dispatchGrudges({
       type: GRUDGE_UNDO,
+      payload: {},
+    });
+  }
+
+  function redoGrudge() {
+    dispatchGrudges({
+      type: GRUDGE_REDO,
+      payload: {},
     });
   }
 
@@ -101,6 +121,7 @@ export const GrudgeProvider = ({ children }) => {
         addGrudge,
         toggleForgiveness,
         undoGrudge,
+        redoGrudge,
         hasPastGrudge,
         hasFutureGrudge,
       }}

@@ -6,7 +6,9 @@ import GrudgeList from "../components/grudge-list";
 import NewGrudge from "../components/new-grudge";
 
 function PageIndex() {
-  const { undoGrudge, hasPastGrudge } = useContext(GrudgeContext);
+  const { undoGrudge, redoGrudge, hasPastGrudge, hasFutureGrudge } = useContext(
+    GrudgeContext,
+  );
 
   return (
     <>
@@ -21,7 +23,9 @@ function PageIndex() {
           <button disabled={!hasPastGrudge} onClick={undoGrudge}>
             Undo
           </button>
-          <button>Redo</button>
+          <button disabled={!hasFutureGrudge} onClick={redoGrudge}>
+            Redo
+          </button>
         </section>
         <GrudgeList />
       </main>
