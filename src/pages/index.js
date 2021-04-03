@@ -19,8 +19,13 @@ function PageIndex() {
   function toggleForgiveness(id) {
     setGrudges(
       grudges.map((grudge) => {
-        if (grudge.id !== id) return grudge;
-        return { ...grudge, forgiven: !grudge.forgiven };
+        if (grudge.id !== id) {
+          return grudge;
+        }
+        return {
+          ...grudge,
+          forgiven: !grudge.forgiven,
+        };
       }),
     );
   }
