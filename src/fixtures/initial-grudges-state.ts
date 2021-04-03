@@ -1,7 +1,7 @@
 import name from "random-name";
 import { v4 as uuidv4 } from "uuid";
 
-const initialState = [
+const initialGrudgesState = [
   {
     id: uuidv4(),
     person: name.first(),
@@ -70,4 +70,4 @@ const initialState = [
   },
 ];
 
-export default initialState;
+export default initialGrudgesState;

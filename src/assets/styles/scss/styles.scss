@@ -34,18 +34,21 @@ input[type="submit"] {
   color: white;
   padding: 0.5em;
   transition: all 0.2s;
-}
+  cursor: pointer;
 
-button:hover,
-.button:hover,
-input[type="submit"]:hover {
-  background-color: $color-primary-4;
-}
+  &:hover {
+    background-color: $color-primary-4;
+  }
 
-button:active,
-.button:active,
-input[type="submit"]:active {
-  background-color: $color-primary-3;
+  &:active {
+    background-color: $color-primary-3;
+  }
+
+  &:disabled {
+    background-color: lighten($color-primary-2, 20%);
+    border: 1px solid lighten($color-primary-2, 20%);
+    cursor: not-allowed;
+  }
 }
 
 button.full-width,
@@ -94,4 +97,10 @@ input[type="submit"].full-width {
   &::placeholder {
     color: $color-white-2;
   }
+}
+
+.undo-redo {
+  display: flex;
+  justify-content: space-evenly;
+  margin: 1rem 0;
 }
