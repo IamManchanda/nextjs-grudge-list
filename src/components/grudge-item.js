@@ -1,4 +1,6 @@
-function GrudgeItem({ grudge, onForgive }) {
+import { memo } from "react";
+
+const GrudgeItem = memo(({ grudge, onForgive }) => {
   const forgive = () => onForgive(grudge.id);
   return (
     <article className="grudge">
@@ -12,6 +14,6 @@ function GrudgeItem({ grudge, onForgive }) {
       </div>
     </article>
   );
-}
+});
 
 export default GrudgeItem;
