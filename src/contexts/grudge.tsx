@@ -3,7 +3,7 @@ import { v4 as uuidv4 } from "uuid";
 import initialState from "../fixtures/initial-state";
 import { GRUDGE_ADD, GRUDGE_FORGIVE } from "../constants/grudge";
 
-export const GrudgeContext = createContext();
+export const GrudgeContext = createContext(null);
 
 const grudgesReducer = (grudgesState, { type, payload }) => {
   switch (type) {
