@@ -1,19 +1,40 @@
 import Head from "next/head";
-import { Fragment } from "react";
-import ReactiveCounter from "../components/reactive-counter";
+import { Fragment, useState } from "react";
+import uuid from "uuid/v4";
+
+import initialState from "../fixtures/initial-state";
+
+import GrudgeList from "../components/grudge-list";
+import NewGrudge from "../components/new-grudge";
 
 function PageIndex() {
+  const [grudges, setGrudges] = useState(initialState);
+
+  function addGrudge(grudge) {
+    grudge.id = uuid();
+    grudge.forgiven = false;
+    setGrudges([grudge, ...grudges]);
+  }
+
+  function toggleForgiveness(id) {
+    setGrudges(
+      grudges.map((grudge) => {
+        if (grudge.id !== id) return grudge;
+        return { ...grudge, forgiven: !grudge.forgiven };
+      }),
+    );
+  }
+
   return (
     <Fragment>
       <Head>
-        <title>Next.js - Pure React State Management</title>
+        <title>Next.js - Grudge List</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main>
-        <section className="counters">
-          <ReactiveCounter max={15} step={5} />
-        </section>
+      <main className="app">
+        <NewGrudge onSubmit={addGrudge} />
+        <GrudgeList grudges={grudges} onForgive={toggleForgiveness} />
       </main>
     </Fragment>
   );

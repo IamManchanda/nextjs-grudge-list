@@ -1,45 +1,91 @@
-$button-color: magenta;
+$color-primary-1: hsl(346, 89%, 47%);
+$color-primary-2: hsl(346, 89%, 57%);
+$color-primary-3: hsl(346, 89%, 62%);
+$color-primary-4: hsl(346, 89%, 67%);
 
 html,
-body,
 * {
   box-sizing: border-box;
-  font-family: Helvetica, Arial, sans-serif;
 }
 
-button {
-  background-color: $button-color;
-  border: 5px solid lighten($button-color, 30%);
+body {
+  font: caption;
+}
+
+input {
+  font: caption;
+  padding: 0.5em;
+  border: 1px solid $color-primary-2;
+  background-color: $color-primary-4;
+
+  &:not(:first-of-type) {
+    border-left: none;
+  }
+}
+
+button,
+.button,
+input[type="submit"] {
+  background-color: $color-primary-2;
+  border: 1px solid $color-primary-1;
   color: white;
-  margin: 0 0.5em;
+  padding: 0.5em;
+  transition: all 0.2s;
+}
+
+button:hover,
+.button:hover,
+input[type="submit"]:hover {
+  background-color: $color-primary-4;
+}
+
+button:active,
+.button:active,
+input[type="submit"]:active {
+  background-color: $color-primary-3;
+}
+
+button.full-width,
+.button.full-width,
+input[type="submit"].full-width {
+  width: 100%;
+  margin: 1em 0;
+}
+
+.app {
+  margin: auto;
+  max-width: 400px;
+}
+
+.grudges-search-term {
+  background-color: white;
+  margin-bottom: 0.5em;
+  width: 100%;
+}
+
+.grudge {
+  border: 1px solid $color-primary-3;
   padding: 1em;
-  outline: none;
-  &:hover {
-    background-color: darken($button-color, 5%);
-  }
-  &:active {
-    background-color: darken($button-color, 10%);
+  margin: 1em 0;
+
+  h3 {
+    margin-top: 0;
   }
 }
 
-.counters {
+.grudge-forgiven {
+  color: $color-primary-3;
+}
+
+.new-grudge {
   display: flex;
 }
 
-.counter {
-  border: 5px solid lighten($button-color, 40%);
-  font-weight: 700;
-  margin: 2em auto;
-  padding: 2em;
-  width: 400px;
-}
+.new-grudge-input {
+  width: 100%;
 
-.count {
-  font-size: 8em;
-  text-align: center;
-}
-
-.controls {
-  display: flex;
-  justify-content: center;
+  &,
+  &::placeholder {
+    color: #fff;
+  }
 }
