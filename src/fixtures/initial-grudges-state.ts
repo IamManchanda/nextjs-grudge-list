@@ -68,6 +68,24 @@ const initialGrudgesState = [
     reason: "Ate all of the vegan ham leftovers despite being labelled",
     forgiven: false,
   },
+  {
+    id: uuidv4(),
+    person: name.first(),
+    reason: "Is a Pure Idiot and just don't like",
+    forgiven: false,
+  },
+  {
+    id: uuidv4(),
+    person: name.first(),
+    reason: "Failed to wish me a happy birthday but ate my cake",
+    forgiven: false,
+  },
+  {
+    id: uuidv4(),
+    person: name.first(),
+    reason: "Talked over me when I was telling a story",
+    forgiven: false,
+  },
 ];
 
 export default initialGrudgesState;
